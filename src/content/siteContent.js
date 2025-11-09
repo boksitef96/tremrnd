@@ -18,8 +18,8 @@ export const aboutContent = {
   description:
     'TREM is a Serbian med-tech startup founded at the intersection of mechanical engineering and clinical practice. By merging engineering precision with real surgical experience, we design devices that solve actual problems in the operating room.',
   gallery: [
-    { src: '/images/svi1.jpeg', alt: 'TREM engineering and surgical team collaborating' },
-    { src: '/images/svi2.jpeg', alt: 'TREM founders presenting surgical instrument concept' },
+    { src: '/images/svi1.jpeg', alt: 'TREM engineering and surgical team collaborating', aspect: 'wide' },
+    { src: '/images/svi2.jpeg', alt: 'TREM founders presenting surgical instrument concept', aspect: 'tall' },
   ],
   pillars: [
     {

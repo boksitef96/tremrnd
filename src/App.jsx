@@ -232,21 +232,25 @@ function App() {
                 </div>
               ))}
             </div>
-            <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
               {aboutContent.gallery.map((item, index) => (
                 <div
                   key={item.src}
-                  className="group relative overflow-hidden rounded-[28px] border border-white/60 bg-white/80 shadow-card transition duration-500 hover:-translate-y-1 hover:shadow-elevated"
+                  className="group relative h-56 overflow-hidden rounded-[26px] border border-white/60 bg-white/80 shadow-card transition duration-500 hover:-translate-y-1 hover:shadow-elevated sm:h-60 lg:h-64"
                   style={{ animationDelay: `${index * 80}ms` }}
                 >
                   <img
                     src={item.src}
                     alt={item.alt}
-                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                    className={`h-full w-full object-cover transition duration-500 group-hover:scale-105 ${
+                      item.aspect === 'tall'
+                        ? 'object-[center_top]'
+                        : 'object-[90%_35%]'
+                    }`}
                     loading="lazy"
                     decoding="async"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy/35 via-transparent to-transparent" aria-hidden="true" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy/30 via-transparent to-transparent" aria-hidden="true" />
                 </div>
               ))}
             </div>
@@ -578,37 +582,48 @@ function App() {
           </div>
         </SectionWrapper>
 
-        <SectionWrapper id="contact">
-          <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="space-y-6">
-              <h2 className="section-title text-navy">{contactContent.title}</h2>
-              <p className="section-subtitle">{contactContent.description}</p>
-              <div className="flex flex-wrap gap-4">
-                <a href={`mailto:${contactContent.email}`} className="focus-outline inline-flex items-center gap-2 text-teal">
-                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path d="M4 4h16v16H4z" strokeWidth="1.3" />
-                    <path d="M4 7l8 6 8-6" strokeWidth="1.3" />
-                  </svg>
-                  {contactContent.email}
-                </a>
-                <a
-                  href={contactContent.linkedin}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="focus-outline inline-flex items-center gap-2 text-teal"
-                >
-                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5C1.11 6 0 4.881 0 3.5S1.11 1 2.5 1c1.37 0 2.48 1.119 2.48 2.5zM.22 8h4.56V24H.22zM8.56 8h4.37v2.17h.06c.61-1.07 2.1-2.17 4.33-2.17 4.63 0 5.48 3.04 5.48 6.99V24h-4.76v-7.62c0-1.81-.03-4.14-2.52-4.14-2.53 0-2.92 1.98-2.92 4.01V24H8.56z" />
-                  </svg>
-                  LinkedIn
-                </a>
+        <SectionWrapper id="contact" className="bg-gradient-to-b from-white via-softgray/50 to-white">
+          <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-start">
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <h2 className="section-title text-navy">{contactContent.title}</h2>
+                <p className="section-subtitle max-w-xl">{contactContent.description}</p>
+              </div>
+              <div className="rounded-[28px] border border-white/70 bg-white/95 p-6 shadow-sm shadow-navy/10">
+                <p className="text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">Direct lines</p>
+                <div className="mt-4 grid gap-3">
+                  <a href={`mailto:${contactContent.email}`} className="focus-outline inline-flex items-center gap-3 rounded-2xl border border-teal/15 bg-teal/5 px-4 py-3 text-sm font-medium text-teal transition hover:-translate-y-0.5 hover:bg-teal/10">
+                    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <path d="M4 4h16v16H4z" strokeWidth="1.3" />
+                      <path d="M4 7l8 6 8-6" strokeWidth="1.3" />
+                    </svg>
+                    {contactContent.email}
+                  </a>
+                  <a
+                    href={contactContent.linkedin}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="focus-outline inline-flex items-center gap-3 rounded-2xl border border-navy/10 bg-navy/5 px-4 py-3 text-sm font-medium text-navy transition hover:-translate-y-0.5 hover:bg-navy/10"
+                  >
+                    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5C1.11 6 0 4.881 0 3.5S1.11 1 2.5 1c1.37 0 2.48 1.119 2.48 2.5zM.22 8h4.56V24H.22zM8.56 8h4.37v2.17h.06c.61-1.07 2.1-2.17 4.33-2.17 4.63 0 5.48 3.04 5.48 6.99V24h-4.76v-7.62c0-1.81-.03-4.14-2.52-4.14-2.53 0-2.92 1.98-2.92 4.01V24H8.56z" />
+                    </svg>
+                    LinkedIn
+                  </a>
+                </div>
+              </div>
+              <div className="rounded-[28px] border border-white/70 bg-white/95 p-6 shadow-sm shadow-navy/10">
+                <p className="text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">Response window</p>
+                <p className="mt-3 text-sm text-slate-600">
+                  We respond within 24 hours on business days. For urgent clinical pilots, mention preferred time and we will arrange a call.
+                </p>
               </div>
             </div>
             <form
               data-netlify="true"
               name="contact"
               method="POST"
-              className="glass-card space-y-4"
+              className="glass-card space-y-5"
               netlify-honeypot="bot-field"
             >
               <input type="hidden" name="form-name" value="contact" />
@@ -655,22 +670,22 @@ function App() {
                   className="focus-outline rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-700 shadow-inner"
                 />
               </label>
-              <div className="flex flex-wrap items-center gap-4">
+              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <button
                   type="submit"
-                  className="rounded-full bg-navy px-6 py-3 text-sm font-semibold uppercase tracking-wider text-white shadow-lg shadow-navy/30 transition hover:-translate-y-0.5 focus-outline"
+                  className="w-full rounded-full bg-navy px-6 py-3 text-sm font-semibold uppercase tracking-wider text-white shadow-lg shadow-navy/30 transition hover:-translate-y-0.5 focus-outline sm:w-auto"
                 >
                   Send message
                 </button>
                 <button
                   type="button"
-                  className="rounded-full border border-navy/20 px-6 py-3 text-sm font-semibold uppercase tracking-wider text-navy transition hover:bg-navy/5 focus-outline"
+                  className="w-full rounded-full border border-navy/20 px-6 py-3 text-sm font-semibold uppercase tracking-wider text-navy transition hover:bg-navy/5 focus-outline sm:w-auto"
                 >
                   Request a demo
                 </button>
                 <button
                   type="button"
-                  className="rounded-full border border-teal/30 px-6 py-3 text-sm font-semibold uppercase tracking-wider text-teal transition hover:bg-teal/5 focus-outline"
+                  className="w-full rounded-full border border-teal/30 px-6 py-3 text-sm font-semibold uppercase tracking-wider text-teal transition hover:bg-teal/5 focus-outline sm:w-auto"
                 >
                   Download pitch deck
                 </button>
